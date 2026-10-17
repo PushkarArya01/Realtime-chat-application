@@ -5,6 +5,9 @@ Toolkit manages authentication, loading states, and API errors. This version
 implements **authentication only**, not chat, OAuth, email verification, or
 password recovery.
 
+## Live url
+https://realtime-chat-application-fawn-pi.vercel.app
+
 ## Getting started
 
 Requirements: Node.js **20.19+, 22.12+, or 24+**, npm, and a running
