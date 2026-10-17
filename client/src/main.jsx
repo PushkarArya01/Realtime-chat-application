@@ -6,6 +6,17 @@ import { store } from './app/store.js';
 import App from './App.jsx';
 import './styles.css';
 
+
+// Disable application console output in production
+if (import.meta.env.PROD) {
+    console.log = () => {};
+    console.error = () => {};
+    console.warn = () => {};
+    console.info = () => {};
+    console.debug = () => {};
+}
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
