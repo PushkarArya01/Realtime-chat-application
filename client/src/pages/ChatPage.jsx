@@ -16,7 +16,6 @@ const ChatPage = () => {
         const message = inputValue.trim();
 
         if (!message) return;
-
         if (!socketRef.current) return;
 
         socketRef.current.emit('message', {
@@ -37,9 +36,7 @@ const ChatPage = () => {
     useEffect(() => {
         if (!accessToken) return;
 
-        const socketUrl = import.meta.env.VITE_SOCKET_URL || undefined;
-
-        const socket = io(socketUrl, {
+        const socket = io(import.meta.env.VITE_SOCKET_URL, {
             withCredentials: true,
             auth: {
                 token: accessToken,
@@ -53,6 +50,10 @@ const ChatPage = () => {
                 ...prevMessages,
                 msg,
             ]);
+        });
+
+        socket.on('connect_error', (error) => {
+            console.error('Socket connection failed:', error.message);
         });
 
         return () => {
@@ -82,7 +83,10 @@ const ChatPage = () => {
                     ))}
                 </div>
 
-                <form className="input-area" onSubmit={sendMessage}>
+                <form
+                    className="input-area"
+                    onSubmit={sendMessage}
+                >
                     <input
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
