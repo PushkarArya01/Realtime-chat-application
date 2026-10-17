@@ -12,10 +12,10 @@ import { issueTokens, verifyToken, isTokenError } from '../utils/jwt.js';
 
 const cookieName = 'refreshToken';
 const cookieOptions = {
-  httpOnly: true,
-  secure: env.nodeEnv === 'production',
-  sameSite: 'strict',
-  path: '/api/v1/auth',
+ httpOnly: true,
+    secure: env.nodeEnv === 'production',
+    sameSite: env.nodeEnv === 'production' ? 'none' : 'lax',
+    path: '/api/v1/auth',
 };
 
 /** @param {object} user @returns {import('../types/user.js').PublicUser} */
